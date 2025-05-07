@@ -1,11 +1,20 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
+interface IExtraInfo {
+  age?: number;
+  gender?: string;
+  specialization?: string;
+  licenseNo?: string;
+  yearsOfExperience?: number;
+}
+
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
   role: "admin" | "doctor" | "patient";
+  extra?: IExtraInfo;
   comparePassword(password: string): Promise<boolean>;
 }
 
@@ -19,6 +28,7 @@ const userSchema = new Schema<IUser>(
       enum: ["admin", "doctor", "patient"],
       default: "patient",
     },
+    extra: { type: Object }, // You can also break this into a nested schema
   },
   { timestamps: true }
 );
