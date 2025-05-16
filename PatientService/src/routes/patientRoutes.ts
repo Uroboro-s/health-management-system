@@ -1,9 +1,9 @@
 import express from "express";
-import { checkApiStatus } from "../controllers/doctorController";
+import { checkApiStatus } from "../controllers/patientController";
 
 const router = express.Router();
 
-//check api status
+//check API status
 router.get("/status", checkApiStatus);
 
 export default router;
